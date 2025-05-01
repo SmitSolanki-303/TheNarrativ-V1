@@ -5,6 +5,7 @@ import ServiceSection from '../components/section/ServiceSection'
 import Faq from '../components/section/Faq'
 import Menu from '../components/section/Menu'
 import OurSolutions from '../components/section/OurSolutions'
+import Vision from '../components/section/Vision'
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
                 <HeroSection/>
                 <ServiceSection/>
                 <OurSolutions/>
+                {/* <Vision/> */}
                 <Faq/>
                 <Footer/>
             </div>
