@@ -1,0 +1,12 @@
+html, body {
+    background-color: #000000;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    cursor: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}

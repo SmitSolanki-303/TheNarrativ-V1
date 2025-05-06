@@ -1,36 +1,38 @@
-import { useEffect, useState } from "react";
+// Cursor.jsx
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const Cursor = () => {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isPointer, setIsPointer] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
     const [isHover, setIsHover] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const position = useRef({ x: 0, y: 0 });
+
+    const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
+        let animationFrame;
+
         const updatePosition = (event) => {
-        setPosition({ x: event.clientX, y: event.clientY });
+        position.current = { x: event.clientX, y: event.clientY };
+        cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(() => {
+            setCursorPos(position.current);
+        });
         };
 
         const updateCursorType = () => {
-        const hoveredElements = document.querySelectorAll(":hover");
-        const isHoveringClickable = Array.from(hoveredElements).some((element) => {
-            const tagName = element.tagName.toLowerCase();
-            return (
-            ["a", "button", "input", "textarea", "select"].includes(tagName) ||
-            element.classList.contains("cursor-pointer") 
-            );
-        });
+        const hovered = document.querySelectorAll(":hover");
+        const isClickable = Array.from(hovered).some(el =>
+            ["a", "button", "input", "textarea", "select"].includes(el.tagName.toLowerCase()) ||
+            el.classList.contains("cursor-pointer")
+        );
+        const isHoveringSpecial = Array.from(hovered).some(el =>
+            el.classList.contains("cursor-hover")
+        );
 
-        const isHoveringHoverElement = Array.from(hoveredElements).some((element) => {
-            return element.classList.contains("cursor-hover");
-        });
-
-        // console.log("Hovering", isHoveringHoverElement);
-        
-
-        setIsHover(isHoveringHoverElement);
-        setIsPointer(isHoveringClickable);
+        setIsPointer(isClickable);
+        setIsHover(isHoveringSpecial);
         };
 
         const handleMouseEnter = () => setIsVisible(true);
@@ -51,10 +53,10 @@ const Cursor = () => {
 
     return (
         <motion.div
-        className="fixed top-0 left-0 w-5 h-5 rounded-full bg-white bg-opacity-30 pointer-events-none z-50 mix-blend-difference"
+        className="fixed top-0 left-0 w-5 h-5 rounded-full bg-white bg-opacity-30 pointer-events-none z-[9999] mix-blend-difference"
         animate={{
-            x: position.x,
-            y: position.y,
+            x: cursorPos.x,
+            y: cursorPos.y,
             scale: isHover ? 7 : isPointer ? 2.5 : 1,
             opacity: isVisible ? 1 : 0,
         }}
