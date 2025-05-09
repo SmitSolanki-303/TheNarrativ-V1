@@ -142,7 +142,7 @@ const SolutionItems = ({ solution, index }) => {
     };
 
     return (
-        <div className={`flex flex-col md:flex-row ${isEven ? '' : 'md:flex-row-reverse'} items-center gap-10`}>
+        <div className={`flex flex-col gap-20 md:gap-32 md:flex-row ${isEven ? '' : 'md:flex-row-reverse'} items-center`}>
             <motion.div
                 ref={imageRef}
                 className="flex flex-col gap-4 w-full md:w-1/2"
@@ -164,7 +164,7 @@ const SolutionItems = ({ solution, index }) => {
                         <img
                             src={solution.image}
                             alt={solution.title}
-                            className="w-full h-full object-cover transform transition-transform group-hover:scale-105 duration-700"
+                            className="w-full h-full object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105"
                         />
                     </motion.div>
                 </div>

@@ -114,20 +114,22 @@ const Menu = () => {
     return (
         <>
         {/* Fixed Menu Button */}
-        <motion.button
-            className={`fixed top-8 right-8 z-50 px-5 py-2.5 text-sm uppercase tracking-widest font-medium rounded-full transition-all duration-300 flex items-center group ${
-            isOpen
-                ? "bg-white text-black hover:bg-white/90"
-                : "bg-black/20 text-white hover:bg-black/30 backdrop-blur-md border border-white/10"
-            }`}
-            onClick={toggleMenu}
-            variants={buttonVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-        >
-            <span className="relative transition-colors">{isOpen ? "CLOSE" : "MENU"}</span>
-        </motion.button>
+        <div className="hidden sm:block">
+            <motion.button
+                className={`fixed top-8 right-8 z-50 px-5 py-2.5 text-sm uppercase tracking-widest font-medium rounded-full transition-all duration-300 flex items-center group  ${
+                isOpen
+                    ? "bg-white text-black hover:bg-white/90"
+                    : "bg-black/20 text-white hover:bg-black/30 backdrop-blur-md border border-white/10"
+                }`}
+                onClick={toggleMenu}
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+            >
+                <span className="relative transition-colors">{isOpen ? "CLOSE" : "MENU"}</span>
+            </motion.button>
+        </div>
 
         {/* Full Screen Menu */}
         <AnimatePresence>
@@ -377,7 +379,7 @@ const Menu = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1, duration: 0.5 }}
                 >
-                    {["Instagram", "Twitter", "LinkedIn", "YouTube"].map((social, index) => (
+                    {["Instagram", "Twitter", "LinkedIn"].map((social, index) => (
                     <motion.a
                         key={social}
                         href={`#${social.toLowerCase()}`}

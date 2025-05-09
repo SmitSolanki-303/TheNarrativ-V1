@@ -1,8 +1,6 @@
-"use client"
-
 import { useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const HeroSection = () => {
     const controls = useAnimation()
@@ -16,17 +14,7 @@ const HeroSection = () => {
 
     return (
         <div className="relative w-full h-screen overflow-hidden">
-            {/* Video background placeholder - you can replace with actual video */}
-            <div className="absolute inset-0 bg-black z-0">
-                {/* Animated grain effect */}
-                <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage:
-                        "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
-                    }}
-                />
-            </div>
+
 
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/90 z-10"/>
@@ -56,7 +44,7 @@ const HeroSection = () => {
             </div>
 
             {/* Animated lines */}
-            <div className="absolute inset-0 z-15 overflow-hidden">
+            <div className="absolute inset-0 z-15 overflow-hidden hidden sm:block">
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: "100%" }}
@@ -78,13 +66,13 @@ const HeroSection = () => {
             </div>
 
             {/* Hero content */}
-            <div className="relative z-20 flex flex-col items-center justify-center h-full px-8">
+            <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 sm:px-8">
                 {/* Small indicator with gradient */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="flex items-center gap-2 mb-8"
+                    className="flex items-center gap-2 mb-4 sm:mb-8"
                 >
                     <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
                         <span className="text-black text-xs font-bold">i</span>
@@ -98,7 +86,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-center"
                 >
-                    <h1 className="text-white font-mono text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tighter">
+                    <h1 className="text-white font-mono text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 sm:mb-6 tracking-tighter">
                         <span className="inline-block">At Narrativ</span>
                         <span className="text-gradient bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                         .
@@ -109,7 +97,7 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="text-white/80 text-xl md:text-2xl max-w-2xl mx-auto font-light"
+                        className="text-white/80 text-base xs:text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto font-light px-2"
                     >
                         We craft compelling digital experiences that tell your story
                     </motion.p>
@@ -120,9 +108,9 @@ const HeroSection = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 1 }}
-                    className="mt-6 mb-10"
+                    className="mt-4 sm:mt-6 mb-6 sm:mb-10 px-2"
                 >
-                    <p className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent text-lg md:text-xl font-medium">
+                    <p className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent text-sm xs:text-base sm:text-lg md:text-xl font-medium text-center">
                         Designs that feel original, on-brand, and truly yours
                     </p>
                 </motion.div>
@@ -131,11 +119,11 @@ const HeroSection = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="mt-8 flex flex-col sm:flex-row gap-4 items-center"
+                    className="mt-4 sm:mt-8 flex flex-col items-center"
                 >
                     <a
                         href="#services"
-                        className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 rounded-full group flex items-center shadow-lg shadow-purple-500/20"
+                        className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-sm sm:text-base text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 rounded-full group flex items-center shadow-lg shadow-purple-500/20"
                     >   
                         Explore Our Work
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -143,7 +131,7 @@ const HeroSection = () => {
 
                     {/* <a
                         href="#contact"
-                        className="px-8 py-3 border border-white/20 backdrop-blur-sm bg-white/5 text-white hover:bg-white/10 transition-all duration-300 rounded-full group flex items-center"
+                        className="px-6 sm:px-8 py-2.5 sm:py-3 border border-white/20 backdrop-blur-sm bg-white/5 text-white hover:bg-white/10 transition-all duration-300 rounded-full group flex items-center"
                     >
                         Get in Touch
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -151,28 +139,28 @@ const HeroSection = () => {
                 </motion.div>
 
                 {/* Floating badges */}
-                <div className="absolute bottom-32 left-8 md:left-16 z-30">
-                <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                    className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-sm flex items-center"
-                >
-                    <span className="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
-                    Digital Transformation
-                </motion.div>
+                <div className="absolute bottom-16 sm:bottom-24 md:bottom-32 left-4 sm:left-8 md:left-16 z-30 hidden sm:block">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 1.2 }}
+                        className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-sm flex items-center"
+                    >
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 mr-2"></span>
+                        Digital Transformation
+                    </motion.div>
                 </div>
 
-                <div className="absolute bottom-32 right-8 md:right-16 z-30">
-                <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 1.4 }}
-                    className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-sm flex items-center"
-                >
-                    <span className="w-2 h-2 rounded-full bg-purple-400 mr-2"></span>
-                    Custom Design
-                </motion.div>
+                <div className="absolute bottom-16 sm:bottom-24 md:bottom-32 right-4 sm:right-8 md:right-16 z-30 hidden sm:block">
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 1.4 }}
+                        className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-sm flex items-center"
+                    >
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400 mr-2"></span>
+                        Custom Design
+                    </motion.div>
                 </div>
             </div>
 

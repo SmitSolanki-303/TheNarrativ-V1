@@ -1,13 +1,15 @@
+import React,{ Suspense, lazy ,useMemo, useState } from 'react';
 import './App.css'
 import Cursor from './components/ui/Cursor';
-import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useIsMobile } from './components/hooks/UseIsMobile';
 import IntroAnimation from './components/layout/IntroAnimation';
-import { useMemo, useState } from 'react';
 
 const queryClient = new QueryClient();
+
+// lazy loading the Home components
+const Home = React.lazy(() => import('./pages/Home'));
 
 function App() {
 
@@ -22,7 +24,9 @@ function App() {
       {!isIntroDone ? (
         <IntroAnimation onFinish={() => setIsIntroDone(true)} />
       ) : (
-        <Home />
+        <Suspense fallback={<div className="w-full h-screen bg-black"></div>}>
+          <Home/>
+        </Suspense>
       )}
     </QueryClientProvider>
   )
