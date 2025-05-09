@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Plus, Minus } from 'phosphor-react';
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 
 const Faq = () => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -9,7 +9,6 @@ const Faq = () => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
-    
     const faqs = [
         {
             question: "What makes narrativ different from other agencies?",
@@ -32,20 +31,19 @@ const Faq = () => {
             answer: "The first step is to reach out through our contact form. We'll schedule an initial consultation to discuss your project, goals, and requirements. After this conversation, we'll prepare a custom proposal outlining our approach, timeline, and investment. Once approved, we'll kick off with a discovery session and begin the journey of crafting your digital narrative."
         }
     ];
-    
-    const fadeInUp = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-    };
-    
-    const staggerContainer = {
-        hidden: {},
-        visible: {
-            transition: {
-                staggerChildren: 0.2
-            }
+
+    // For FAQ items
+    const [faqsRef, faqsInView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+    const faqsControls = useAnimation();
+
+    useEffect(() => {
+        if (faqsInView) {
+            faqsControls.start("visible");
         }
-    };
+    }, [faqsControls, faqsInView]);
 
     const itemFade = (delay = 0) => ({
         hidden: { opacity: 0, y: 20 },
@@ -60,37 +58,59 @@ const Faq = () => {
     });
 
     return (
-        <section id="faq" className="py-20 px-6 md:px-12 my-20 md:my-40 relative">
-            {/* Background elements */}
+        <div className="w-full text-white min-h-screen px-6 md:px-12 py-16 relative" id="faq">
+            {/* Decorative elements */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-500/5 blur-3xl"></div>
+                <div className="absolute bottom-1/3 left-1/3 w-80 h-80 rounded-full bg-gradient-to-tr from-pink-500/10 to-red-500/5 blur-3xl"></div>
             </div>
             
-            <div className="container mx-auto relative z-10">
-                <div className="max-w-3xl mx-auto">
-                    <motion.div
-                        variants={fadeInUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        className="text-center mb-16"
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Header section */}
+                <div className="mb-20">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-2 mb-8"
                     >
-                        <span className="text-sm uppercase tracking-wider font-medium mb-2 text-purple-400">
-                            Questions & Answers
-                        </span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-2">
-                            Frequently Asked Questions
-                        </h2>
+                        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                            <span className="text-black text-xs font-bold">III</span>
+                        </div>
+                        <span className="font-medium text-white/70">We're here to help</span>
                     </motion.div>
 
-                    <div className="space-y-6">
+                    <motion.h1 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="text-6xl md:text-8xl font-bold tracking-tight"
+                    >
+                        FAQ<span className="text-gradient bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">.</span>
+                    </motion.h1>
+                </div>
+
+                <div className="max-w-3xl mx-auto">
+                    <motion.div
+                        ref={faqsRef}
+                        variants={{
+                            hidden: {},
+                            visible: {
+                                transition: {
+                                    staggerChildren: 0.2
+                                }
+                            }
+                        }}
+                        initial="hidden"
+                        animate={faqsControls}
+                        className="space-y-6"
+                    >
                         {faqs.map((faq, index) => (
                             <motion.div
                                 key={index}
                                 variants={itemFade(index * 0.1)}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, amount: 0.1 }}
                                 className="border-b border-white/10 pb-6"
                             >
                                 <button
@@ -106,10 +126,13 @@ const Faq = () => {
                                         transition={{ duration: 0.3 }}
                                     >
                                         <motion.div
-                                            animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                                            animate={{ rotate: activeIndex === index ? 45 : 0 }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            {activeIndex === index ? <Minus size={16} /> : <Plus size={16} />}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            </svg>
                                         </motion.div>
                                     </motion.div>
                                 </button>
@@ -128,10 +151,10 @@ const Faq = () => {
                                 </AnimatePresence>
                             </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 

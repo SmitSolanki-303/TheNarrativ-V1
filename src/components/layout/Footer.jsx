@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 const Footer = () => {
     // Navigation - Menu Items
     const navItems = [
-        { name: 'Work', href: '#work' },
-        { name: 'Vision', href: '#vision' },
+        { name: 'Company', href: '#' },
+        { name: 'Services', href: '#services' },
         { name: 'FAQ', href: '#faq' },
         { name: 'Contact', href: '#contact' },
     ];

@@ -54,7 +54,7 @@ const OurSolutions = () => {
                         className="flex items-center gap-2 mb-8"
                     >
                         <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                            <span className="text-black text-xs font-bold">i</span>
+                            <span className="text-black text-xs font-bold">II</span>
                         </div>
                         <span className="font-medium text-white/70">How we deliver</span>
                     </motion.div>
